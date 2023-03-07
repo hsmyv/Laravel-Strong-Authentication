@@ -112,7 +112,7 @@ Helpers function:
     }
     ?>
     
-We have to avoid from use to 'User::all();'
+We have to avoid from use to fetch Users like *'User::all();'*
 
      public function index()
     {
