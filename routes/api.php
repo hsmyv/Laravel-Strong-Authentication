@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::resource('users', UserController::class);
+    Route::apiResource('users', UserController::class);
 });
 Route::post('register', [UserController::class, 'register']);
 Route::middleware('throttle:1,1,ip')->post('login', [UserController::class, 'login']);
