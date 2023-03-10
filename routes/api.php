@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 Route::post('register', [UserController::class, 'register']);
 Route::middleware('throttle:1,1,ip')->post('login', [UserController::class, 'login']);
+
+
+Route::apiResource('posts', PostController::class);

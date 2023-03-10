@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\usercontroller;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/posts', [HomeController::class, 'posts'])->name('home.posts.index');
+Route::get('/posts/create', [HomeController::class, 'posts_create'])->name('home.posts.create');
 
 
 

@@ -6,20 +6,15 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdateRequest;
 use App\Models\User;
-use Illuminate\Validation\Rule;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        $fields = $request->validated();
 
-        $user = User::create($fields);
+        $user = User::create($request->validated());
 
         $token = $user->createToken('myappToken')->plainTextToken;
 
@@ -32,9 +27,9 @@ class UserController extends Controller
     public function login(LoginRequest $request)
     {
 
-        $fields = $request->validated();
 
-        if (Auth::guard('web')->attempt($fields)) {
+
+        if (Auth::guard('web')->attempt($request->validated())) {
 
             $user = Auth::user();
 
@@ -52,10 +47,10 @@ class UserController extends Controller
 
     public function update(UpdateRequest $request)
     {
-        $fields = $request->validated();
+
         $user = $request->user();
 
-        $user->update($fields);
+        $user->update($request->validated());
 
         return success(['message' => 'User details updated successfully.']);
     }
