@@ -53,7 +53,7 @@
               </li>
               <li>
                 <a
-                  href="javascript:void(0)"
+                  href="{{route('home.posts.index')}}"
                   class="text-dark hover:text-primary flex py-2 text-base font-medium lg:ml-12 lg:inline-flex"
                 >
                   Posts
@@ -65,6 +65,14 @@
                   class="text-dark hover:text-primary flex py-2 text-base font-medium lg:ml-12 lg:inline-flex"
                 >
                   Create Post
+                </a>
+              </li>
+                <li>
+                <a
+                  href="{{route('home.posts.form')}}"
+                  class="text-dark hover:text-primary flex py-2 text-base font-medium lg:ml-12 lg:inline-flex"
+                >
+                  Form Page
                 </a>
               </li>
             </ul>

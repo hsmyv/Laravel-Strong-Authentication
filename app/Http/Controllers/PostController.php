@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -36,7 +36,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $post = $request->validated();
-        $post['user_id'] = 1;
+        $post['user_id'] = 1; 
         Post::create($post);
         return redirect()->route('home.posts.index');
     }

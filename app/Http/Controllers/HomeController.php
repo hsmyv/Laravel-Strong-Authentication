@@ -22,4 +22,8 @@ class HomeController extends Controller
     {
         return view('Posts.Create');
     }
+    public function posts_form()
+    {
+        return view('Posts.form');
+    }
 }
