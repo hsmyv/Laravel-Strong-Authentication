@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UpdateRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
@@ -59,6 +60,15 @@ class UserController extends Controller
     {
         $users = User::orderBy('name', 'asc')->get();
         return $users;
+    }
+
+    public function logout(Request $request)
+    {
+        auth()->guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return response()->json(null, 200);
     }
 
 }

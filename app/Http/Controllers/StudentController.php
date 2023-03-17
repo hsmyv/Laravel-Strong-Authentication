@@ -22,16 +22,19 @@ class StudentController extends Controller
         ]);
     }
 
-    public function store(StudentStoreRequest $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            '*' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'course' => 'required'
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
-                'errors' => $validator->errors(),
+                'errors' => $validator->messages(),
             ]);
         } else {
             $student = Student::create($request->all());

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\PostedSuccessful;
+use App\Listeners\SendPostConfirmationEmail;
 use App\Models\Post;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -19,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        PostedSuccessful::class => [
+            SendPostConfirmationEmail::class,
+        ],
     ];
 
     /**
@@ -28,6 +33,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+
     }
 }

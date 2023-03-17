@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostedSuccessful;
 use App\Http\Requests\PostRequest;
+use App\Listeners\SendPostConfirmationEmail;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -35,9 +37,10 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $post = $request->validated();
-        $post['user_id'] = 1; 
-        Post::create($post);
+        $formFill = $request->validated();
+        $formFill['user_id'] = 1;
+        $post = Post::create($formFill);
+        PostedSuccessful::dispatch($post);
         return redirect()->route('home.posts.index');
     }
 
