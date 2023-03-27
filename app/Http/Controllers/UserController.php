@@ -28,8 +28,6 @@ class UserController extends Controller
     public function login(LoginRequest $request)
     {
 
-
-
         if (Auth::guard('web')->attempt($request->validated())) {
 
             $user = Auth::user();
@@ -50,7 +48,10 @@ class UserController extends Controller
     {
 
         $user = $request->user();
-
+        // Check that the authenticated user can only update their own account details
+        if ($request->input('email') !== $user->email) {
+            return response(['message' => 'Unauthorized action: User ID mismatch'], 403);
+        }
         $user->update($request->validated());
 
         return success(['message' => 'User details updated successfully.']);

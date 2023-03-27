@@ -24,7 +24,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('users', UserController::class);
 });
 Route::post('register', [UserController::class, 'register']);
-//Route::middleware('throttle:1,1,ip')->post('login', [UserController::class, 'login']);
+// Route::middleware('throttle:1,1,ip')->post('login', [UserController::class, 'login']);
+Route::post('login', [UserController::class, 'login']);
 
 
 Route::apiResource('posts', PostController::class);
